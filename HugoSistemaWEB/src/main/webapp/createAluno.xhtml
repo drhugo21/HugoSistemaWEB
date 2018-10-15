@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<title>Cadastrar Aluno</title>
+</h:head>
+
+<h:body>
+	<h:form id="form">
+		<p:growl id="growl" showDetail="true" sticky="true" />
+		<p:tabMenu>
+			<p:menuitem icon="ui-icon-disk" value="Cadastrar"
+				url="create.xhtml" />
+			<p:menuitem icon="ui-icon-disk" value="Visualização"
+				url="cadastrados.xhtml" />
+			<p:menuitem icon="ui-icon-disk" value="Editar/Remover"
+				url="updateAluno.xhtml" />
+		</p:tabMenu>
+		
+		<p:panelGrid style="margin-botton:20px" columns="2" layout="grid">
+			<p:outputLabel value="Nome do aluno:" />
+			<p:inputText id="nomeAluno" label="nome"
+				value="#{alunoBean.aluno.nome}" style="width:350px" />
+		</p:panelGrid>
+		<p:panelGrid style="margin-botton:20px" columns="2" layout="grid">
+			<p:outputLabel value="Data do aluno:" />
+			<p:inputText id="dataAluno" label="data"
+				value="#{alunoBean.aluno.data}" style="width:350px" />
+		</p:panelGrid>
+		<p:commandButton value="Salvar Aluno" update="growl: form"
+			action="#{alunoBean.createAluno()}">
+		</p:commandButton>
+	</h:form>
+</h:body>
+</html>

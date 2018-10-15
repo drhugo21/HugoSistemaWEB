@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+<h:head>
+	<title>Sistema Web</title>
+</h:head>
+
+<h:body>
+	<h:form>
+		<p:messages>
+		</p:messages>
+		<p:tabMenu>
+			<p:menuitem icon="ui-icon-disk" value="PCs Montados"
+				url="pcsMontados.xhtml" />
+			<p:menuitem icon="ui-icon-disk" value="Monte seu PC"
+				url="createPc.xhtml" />
+		</p:tabMenu>
+	</h:form>
+	<marquee scrollamount="40">
+		<h1 style="font-size: 100px; color: blue; text-align: left;">Monta ai comedia</h1>
+		<h:graphicImage url="/images/pc.jpg"/>
+	</marquee>
+</h:body>
+</html>
