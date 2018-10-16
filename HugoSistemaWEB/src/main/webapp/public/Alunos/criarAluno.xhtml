@@ -5,34 +5,33 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
-	<title>Cadastrar Aluno</title>
+	<title>Sistema WEB</title>
 </h:head>
 
 <h:body>
 	<h:form id="form">
 		<p:growl id="growl" showDetail="true" sticky="true" />
 		<p:tabMenu>
-			<p:menuitem icon="ui-icon-disk" value="Cadastrar"
-				url="create.xhtml" />
-			<p:menuitem icon="ui-icon-disk" value="Visualização"
-				url="cadastrados.xhtml" />
-			<p:menuitem icon="ui-icon-disk" value="Editar/Remover"
-				url="updateAluno.xhtml" />
+			<p:menuitem icon="ui-icon-disk" value="Adicionar aluno"
+				url="criarAluno.xhtml" />
+			<p:menuitem icon="ui-icon-disk" value="Alunos cadastrados"
+				url="alunosCadastrados.xhtml" />
 		</p:tabMenu>
 		
 		<p:panelGrid style="margin-botton:20px" columns="2" layout="grid">
 			<p:outputLabel value="Nome do aluno:" />
 			<p:inputText id="nomeAluno" label="nome"
 				value="#{alunoBean.aluno.nome}" style="width:350px" />
-		</p:panelGrid>
+		
 		<p:panelGrid style="margin-botton:20px" columns="2" layout="grid">
-			<p:outputLabel value="Data do aluno:" />
-			<p:inputText id="dataAluno" label="data"
+			<p:outputLabel value="Ano de nascimento do aluno:" />
+			<p:inputText id="dataAluno" label="nascimento"
 				value="#{alunoBean.aluno.data}" style="width:350px" />
-		</p:panelGrid>
-		<p:commandButton value="Salvar Aluno" update="growl: form"
-			action="#{alunoBean.createAluno()}">
+			
+		<p:commandButton value="Salvar aluno" update="growl: form"
+			action="#{alunoBean.criarAluno()}">
 		</p:commandButton>
+
 	</h:form>
 </h:body>
 </html>

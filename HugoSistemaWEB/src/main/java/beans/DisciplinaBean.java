@@ -58,16 +58,10 @@ public class DisciplinaBean implements Serializable {
 		}
 
 	public void removerDisciplina() {
-		disciplinaService.remove(alunoBuscado);
-		alunos = (Set<Aluno>) alunoService.getAll();
-		alunoBuscado = new Aluno();
 //		setRenderPanelGridAlunoBuscado(false);
 	}
 
 	public void salvarEdicao() throws IOException {
-		alunoService.update(alunoBuscado);
-		alunos = (Set<Aluno>) alunoService.getAll();
-		setAlunoBuscado(new Aluno());
 		FacesContext.getCurrentInstance().getExternalContext().redirect("cadastrados.xhtml");
 	}
 	
