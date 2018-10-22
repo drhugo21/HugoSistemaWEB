@@ -17,6 +17,26 @@
 				url="criarAluno.xhtml" />
 			<p:menuitem icon="ui-icon-disk" value="Alunos cadastrados"
 				url="alunosCadastrados.xhtml" />
+			<p:menuitem icon="ui-icon-disk" value="Editar ou remover alunos"
+				url="alunosCadastrados.xhtml" />
+			<p:menuitem icon="ui-icon-disk" value="Adicionar professor"
+				url="alunosCadastrados.xhtml" />
+			<p:menuitem icon="ui-icon-disk" value="Professores cadastrados"
+				url="alunosCadastrados.xhtml" />
+			<p:menuitem icon="ui-icon-disk" value="Editar ou remover professores"
+				url="alunosCadastrados.xhtml" />
+			<p:menuitem icon="ui-icon-disk" value="Adicionar disciplina"
+				url="alunosCadastrados.xhtml" />
+			<p:menuitem icon="ui-icon-disk" value="Disciplinas cadastrados"
+				url="alunosCadastrados.xhtml" />
+			<p:menuitem icon="ui-icon-disk" value="Editar ou remover disciplinas"
+				url="alunosCadastrados.xhtml" />
+			<p:menuitem icon="ui-icon-disk" value="Adicionar turma"
+				url="alunosCadastrados.xhtml" />
+			<p:menuitem icon="ui-icon-disk" value="Turmas cadastrados"
+				url="alunosCadastrados.xhtml" />
+			<p:menuitem icon="ui-icon-disk" value="Editar ou remover turmas"
+				url="alunosCadastrados.xhtml" />
 		</p:tabMenu>
 
 		<p:carousel value="#{alunoBean.alunos}"
@@ -27,14 +47,14 @@
 
 				<f:facet name="header">
 					<p:outputLabel style="font-weight: bold;"
-						value="Nome: #{aluno.nome}. ID: #{aluno.matricula}. Data de nascimento: #{aluno.data}" />
+						value="Nome: #{aluno.nome}. ID: #{aluno.matriculaAluno}. Data de nascimento: #{aluno.data}" />
 				</f:facet>
 				</p:panelGrid>
 		</p:carousel>
 
 		<p:panelGrid columns="2" id="buscaAluno">
 			<h:outputText value="Digite a matricula do aluno:" />
-			<p:inputText value="#{alunoBean.matriculaAluno}" id="idPcBuscado" />
+			<p:inputText value="#{alunoBean.matriculaAluno}" id="idAlunoBuscado" />
 		</p:panelGrid>
 		<p:commandButton value="Buscar aluno" update="growl: form"
 			action="#{alunoBean.buscarAluno()}" />

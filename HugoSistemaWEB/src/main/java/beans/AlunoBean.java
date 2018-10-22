@@ -19,14 +19,14 @@ import services.AlunoService;
 @Named(value = "alunoBean")
 public class AlunoBean implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private int matriculaAluno;
+	private Long matriculaAluno;
 	private Aluno aluno = new Aluno();
 	private Aluno alunoBuscado = new Aluno();
 	private Aluno alunoEditado;
 	private List<Aluno> alunos;
 	@Inject
 	private AlunoService alunoService;
-	private boolean renderPanelGridPcBuscado;
+	private boolean renderPanelGridAlunoBuscado;
 	
 	@PostConstruct
 	public void init() {
@@ -42,7 +42,7 @@ public class AlunoBean implements Serializable {
 	public void editarAluno() throws IOException {
 		setAlunoEditado(getAlunoBuscado());
 		setAlunoBuscado(new Aluno());
-		setRenderPanelGridPcBuscado(false);
+		setRenderPanelGridAlunoBuscado(false);
 		FacesContext.getCurrentInstance().getExternalContext().redirect("editarAluno.xhtml");
 	}
 
@@ -52,14 +52,14 @@ public class AlunoBean implements Serializable {
 			if (buscaAluno.getMatricula() == getMatriculaAluno()) {
 				setAlunoBuscado(buscaAluno);
 				encontrado = true;
-				setRenderPanelGridPcBuscado(true);
-				setMatriculaAluno(0);
+				setRenderPanelGridAlunoBuscado(true);
+				setMatriculaAluno(0L);
 			}
 		}
 		if (!encontrado) {
 			FacesContext.getCurrentInstance().addMessage("ERROR",
 					new FacesMessage("Aluno com matricula " + getMatriculaAluno() + " nao foi encontrado"));
-			setRenderPanelGridPcBuscado(false);
+			setRenderPanelGridAlunoBuscado(false);
 		}	
 	} 
 
@@ -67,7 +67,7 @@ public class AlunoBean implements Serializable {
 		alunoService.remove(alunoBuscado);
 		alunos = alunoService.getAll();
 		alunoBuscado = new Aluno();
-		setRenderPanelGridPcBuscado(false);
+		setRenderPanelGridAlunoBuscado(false);
 	}
 	
 	public void salvarEdicao() throws IOException {
@@ -77,7 +77,7 @@ public class AlunoBean implements Serializable {
 		FacesContext.getCurrentInstance().getExternalContext().redirect("alunosCadastrados.xhtml");
 	}
 
-	public void salvarPc() {
+	public void salvarAluno() {
 		aluno.setNome(aluno.getNome());
 		aluno.setData(aluno.getData());
 		FacesContext.getCurrentInstance().addMessage(null,
@@ -121,19 +121,19 @@ public class AlunoBean implements Serializable {
 		this.alunoEditado = alunoEditado;
 	}
 
-	public boolean isRenderPanelGridPcBuscado() {
-		return renderPanelGridPcBuscado;
+	public boolean isRenderPanelGridAlunoBuscado() {
+		return renderPanelGridAlunoBuscado;
 	}
 
-	public void setRenderPanelGridPcBuscado(boolean renderPanelGridPcBuscado) {
-		this.renderPanelGridPcBuscado = renderPanelGridPcBuscado;
+	public void setRenderPanelGridAlunoBuscado(boolean renderPanelGridAlunoBuscado) {
+		this.renderPanelGridAlunoBuscado = renderPanelGridAlunoBuscado;
 	}
 
-	public int getMatriculaAluno() {
+	public Long getMatriculaAluno() {
 		return matriculaAluno;
 	}
 
-	public void setMatriculaAluno(int i) {
+	public void setMatriculaAluno(Long i) {
 		this.matriculaAluno = i;
 	}
 
