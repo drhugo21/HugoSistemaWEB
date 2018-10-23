@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+<h:head>
+	<title>Sistema WEB</title>
+</h:head>
+
+<h:body>
+	<h:form id="form">
+		<p:growl id="growl" showDetail="true" sticky="true" />
+		<p:tabMenu>
+			<p:menuitem icon="ui-icon-disk" value="Adicionar aluno"
+				url="criarAluno.xhtml" />
+			<p:menuitem icon="ui-icon-disk" value="Alunos cadastrados"
+				url="alunosCadastrados.xhtml" />
+			<p:menuitem icon="ui-icon-disk" value="Editar ou remover alunos"
+				url="alunosCadastrados.xhtml" />
+			<p:menuitem icon="ui-icon-disk" value="Adicionar professor"
+				url="alunosCadastrados.xhtml" />
+			<p:menuitem icon="ui-icon-disk" value="Professores cadastrados"
+				url="alunosCadastrados.xhtml" />
+			<p:menuitem icon="ui-icon-disk" value="Editar ou remover professores"
+				url="alunosCadastrados.xhtml" />
+			<p:menuitem icon="ui-icon-disk" value="Adicionar disciplina"
+				url="alunosCadastrados.xhtml" />
+			<p:menuitem icon="ui-icon-disk" value="Disciplinas cadastrados"
+				url="alunosCadastrados.xhtml" />
+			<p:menuitem icon="ui-icon-disk" value="Editar ou remover disciplinas"
+				url="alunosCadastrados.xhtml" />
+			<p:menuitem icon="ui-icon-disk" value="Adicionar turma"
+				url="alunosCadastrados.xhtml" />
+			<p:menuitem icon="ui-icon-disk" value="Turmas cadastrados"
+				url="alunosCadastrados.xhtml" />
+			<p:menuitem icon="ui-icon-disk" value="Editar ou remover turmas"
+				url="alunosCadastrados.xhtml" />
+		</p:tabMenu>
+
+		<p:carousel value="#{disciplinaBean.disciplinas}"
+			headerText="Suas disciplinas cadastrados" var="al"
+			itemStyle="text-align: center; color: grey" responsive="true">
+			<p:panelGrid columns="3" style="width:100%;margin:10px 0px"
+				layout="grid" columnClasses="label,value,value">
+
+				<f:facet name="header">
+					<p:outputLabel style="font-weight: bold;"
+						value="Nome: #{disciplina.nome}. ID: #{disciplina.matricula}. Professor da disciplina: #{professorDisciplina.nome}" />
+				</f:facet>
+				</p:panelGrid>
+		</p:carousel>
+
+		<p:panelGrid columns="2" id="buscaDisciplina">
+			<h:outputText value="Digite a matricula da discplina:" />
+			<p:inputText value="#{disciplinaBean.matriculaTurma}" id="idTurmaBuscado" />
+		</p:panelGrid>
+		<p:commandButton value="Buscar turma" update="growl: form"
+			action="#{disciplinaBean.buscarDisciplina()}" />
+
+		<p:panelGrid columns="3" style="width:100%;margin:10px 0px"
+			layout="grid" columnClasses="label,value,value"
+			rendered="#{disciplinaBean.renderPanelGridDisciplinaBuscado}">
+
+			<f:facet name="header">
+				<p:outputLabel style="font-weight: bold;"
+					value="Disciplina buscada: #{disciplinaBean.disciplinaBuscada.nome}" />
+			</f:facet>
+			<p:column>
+				<p:commandButton value="Editar disciplina" id="editarDisciplinaBuscado"
+					update="growl: form" action="#{disciplinaBean.editarDiscplina()}" />
+				<p:commandButton value="Remover disciplina" id="removerDisciplinaBuscada" action="#{disciplinaBean.removerDisciplina()}"
+					update="growl: form" />
+			</p:column>
+		</p:panelGrid>
+	</h:form>
+</h:body>
+</html>

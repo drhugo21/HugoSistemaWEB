@@ -42,6 +42,11 @@
 			<p:outputLabel value="Nome da disciplina:" />
 			<p:inputText id="nomeDisciplina" label="nome"
 				value="#{disciplinaBean.disciplina.nome}" style="width:350px" />
+				
+			<p:outputLabel value="Nome do professor da disciplina:" />
+			<p:selectOneMenu value="#{disciplinaBean.disciplina.professorD.matricula}">
+				<f:selectItems value="#{professorBean.professores}" var="prof" itemValue="#{prof.matricula}"/>
+			</p:selectOneMenu>
 			
 		<p:commandButton value="Salvar disciplina" update="growl: form"
 			action="#{disciplinaBean.criarDisciplina()}">

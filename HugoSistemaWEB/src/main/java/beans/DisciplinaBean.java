@@ -15,6 +15,7 @@ import javax.inject.Named;
 
 import entities.Aluno;
 import entities.Disciplina;
+import entities.Professor;
 import services.AlunoService;
 import services.DisciplinaService;
 import services.ProfessorService;
@@ -32,9 +33,7 @@ public class DisciplinaBean implements Serializable {
 	private DisciplinaService disciplinaService;
 	@Inject
 	private ProfessorService professorService;
-	@Inject
-	@ManagedProperty(value = "{professorBean}")
-	private ProfessorBean professorBean;
+	private Professor professorDisciplina;
 	@Inject
 	private AlunoService alunoService;
 	private Disciplina disciplinaBuscada;
@@ -90,11 +89,11 @@ public class DisciplinaBean implements Serializable {
 	}
 	
 	public void salvarPc() {
-		disciplina.setNomeD(disciplina.getNomeD());
+		disciplina.setNome(disciplina.getNome());
 		disciplina.setProfessorD(disciplina.getProfessorD());
 		disciplina.setAlunos(disciplina.getAlunos());
 		FacesContext.getCurrentInstance().addMessage(null,
-				new FacesMessage("Disciplina " + disciplina.getNomeD() + "adicionado"));
+				new FacesMessage("Disciplina " + disciplina.getNome() + "adicionado"));
 		disciplinaService.save(disciplina);
 		disciplinas = (Set<Disciplina>) disciplinaService.getAll();
 		disciplina = new Disciplina();
@@ -114,14 +113,6 @@ public class DisciplinaBean implements Serializable {
 
 	public void setProfessorService(ProfessorService professorService) {
 		this.professorService = professorService;
-	}
-
-	public ProfessorBean getProfessorBean() {
-		return professorBean;
-	}
-
-	public void setProfessorBean(ProfessorBean professorBean) {
-		this.professorBean = professorBean;
 	}
 
 	public AlunoService getAlunoService() {
@@ -174,6 +165,14 @@ public class DisciplinaBean implements Serializable {
 
 	public void setDisciplinaEditado(Disciplina disciplinaEditado) {
 		this.disciplinaEditado = disciplinaEditado;
+	}
+
+	public Professor getProfessorDisciplina() {
+		return professorDisciplina;
+	}
+
+	public void setProfessorDisciplina(Professor professorDisciplina) {
+		this.professorDisciplina = professorDisciplina;
 	}
 
 	public DisciplinaBean() {

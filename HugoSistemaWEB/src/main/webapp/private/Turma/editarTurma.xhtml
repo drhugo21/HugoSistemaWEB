@@ -41,16 +41,13 @@
 
 
 		<p:panelGrid style="margin-botton:20px" columns="2" layout="grid">
-			<p:outputLabel value="Nome do aluno:" />
-			<p:inputText id="nomeAluno" label="nome"
-				value="#{alunoBean.aluno.nome}" style="width:350px" />
-			
-			<p:outputLabel value="Data de nascimento do aluno:" />
-			<p:inputText id="dataAluno" label="nome"
-				value="#{alunoBean.aluno.data}" style="width:350px" />
+			<p:outputLabel value="Nome da turma:" />
+			<p:inputText id="nomeTurma" label="nome"
+				value="#{turmaBean.turma.nome}" style="width:350px" />
 		</p:panelGrid>
 		
-		<p:commandButton value="Salvar Edição" action="#{alunoBean.salvarEdicao()}"/>
+		<p:commandButton value="Salvar Edição" action="#{turmaBean.salvarEdicao()}"/>
 
 	</h:form>
 </h:body>
+</html>

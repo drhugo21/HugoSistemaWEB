@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 @Entity
@@ -18,7 +19,7 @@ public class Disciplina implements Identificavel{
 	@SequenceGenerator(name = "disc_seq_gen", sequenceName = "disc_id_seq")
 	@Id
 	private Long matricula;
-	private String nomeD;
+	private String nome;
 	@ManyToOne
 	@JoinColumn(name = "PROF_ID_DISCIPLINA")
 	private Professor professorD;
@@ -35,13 +36,13 @@ public class Disciplina implements Identificavel{
 	}
 
 
-	public String getNomeD() {
-		return nomeD;
+	public String getNome() {
+		return nome;
 	}
 
 
-	public void setNomeD(String nomeD) {
-		this.nomeD = nomeD;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 
