@@ -4,6 +4,7 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 
+
 <h:head>
 	<title>Sistema WEB</title>
 </h:head>
@@ -13,38 +14,39 @@
 		<p:growl id="growl" showDetail="true" sticky="true" />
 		<p:tabMenu>
 			<p:menuitem icon="ui-icon-disk" value="Adicionar aluno"
-				url="criarAluno.xhtml" />
+				url="/pages/private/criarAluno.xhtml" rendered="#{professorBean.isUserInRole('PROF')}"/>
 			<p:menuitem icon="ui-icon-disk" value="Alunos cadastrados"
-				url="alunosCadastrados.xhtml" />
+				url="/pages/private/alunosCadastrados.xhtml" rendered="#{professorBean.isUserInRole('PROF')}"/>
 			<p:menuitem icon="ui-icon-disk" value="Editar ou remover alunos"
-				url="alunosCadastrados.xhtml" />
+				url="/pages/private/editarAluno.xhtml" rendered="#{professorBean.isUserInRole('PROF')}"/>
 			<p:menuitem icon="ui-icon-disk" value="Adicionar professor"
-				url="alunosCadastrados.xhtml" />
+				url="/pages/private/criarProfessor.xhtml" rendered="#{professorBean.isUserInRole('PROF')}"/>
 			<p:menuitem icon="ui-icon-disk" value="Professores cadastrados"
-				url="alunosCadastrados.xhtml" />
+				url="/pages/public/professoresCadastrados.xhtml" />
 			<p:menuitem icon="ui-icon-disk" value="Editar ou remover professores"
-				url="alunosCadastrados.xhtml" />
+				url="/pages/private/editarProfessor.xhtml" rendered="#{professorBean.isUserInRole('PROF')}"/>
 			<p:menuitem icon="ui-icon-disk" value="Adicionar disciplina"
-				url="alunosCadastrados.xhtml" />
+				url="/pages/private/criarDisciplina.xhtml" rendered="#{professorBean.isUserInRole('PROF')}"/>
 			<p:menuitem icon="ui-icon-disk" value="Disciplinas cadastrados"
-				url="alunosCadastrados.xhtml" />
+				url="/pages/public/disciplinasCadastrados.xhtml" />
 			<p:menuitem icon="ui-icon-disk" value="Editar ou remover disciplinas"
-				url="alunosCadastrados.xhtml" />
+				url="/pages/private/editarDisciplinas.xhtml" rendered="#{professorBean.isUserInRole('PROF')}"/>
 			<p:menuitem icon="ui-icon-disk" value="Adicionar turma"
-				url="alunosCadastrados.xhtml" />
+				url="/pages/private/criarTurmas.xhtml" rendered="#{professorBean.isUserInRole('PROF')}"/>
 			<p:menuitem icon="ui-icon-disk" value="Turmas cadastrados"
-				url="alunosCadastrados.xhtml" />
+				url="/pages/public/turmasCadastrados.xhtml">
 			<p:menuitem icon="ui-icon-disk" value="Editar ou remover turmas"
-				url="alunosCadastrados.xhtml" />
+				url="/pages/private/editarTurma.xhtml" rendered="#{professorBean.isUserInRole('PROF')}"/>
 		</p:tabMenu>
-		
+
+
 		<p:panelGrid style="margin-botton:20px" columns="2" layout="grid">
 			<p:outputLabel value="Nome da turma:" />
 			<p:inputText id="nomeTurma" label="nome"
 				value="#{turmaBean.turma.nome}" style="width:350px" />
-		<p:commandButton value="Salvar turma" update="growl: form"
-			action="#{turmaBean.criarTurma()}">
-		</p:commandButton>
+		</p:panelGrid>
+		
+		<p:commandButton value="Salvar Edição" action="#{turmaBean.salvarEdicao()}"/>
 
 	</h:form>
 </h:body>

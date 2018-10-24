@@ -2,15 +2,20 @@ package beans;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.security.Principal;
 import java.util.List;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import entities.Professor;
 import entities.Professor;
@@ -29,10 +34,31 @@ public class ProfessorBean implements Serializable {
 	@Inject
 	private ProfessorService professorService;
 	private boolean renderPanelGridProfessorBuscado;
+	private String confirmarSenha;	
 		
 	@PostConstruct
 	public void init() {
 		setProfessores(professorService.getAll());
+	}
+	
+	public String getUserLogin() {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		Principal userPrincipal = externalContext.getUserPrincipal();
+		if (userPrincipal == null) {
+			return "Login necessário para usar o sistema";
+		}
+		return "Bem vindo, "+userPrincipal.getName();
+	}
+
+	public void efetuarLogout() throws IOException, ServletException {
+		FacesContext fc = FacesContext.getCurrentInstance();
+		ExternalContext ec = fc.getExternalContext();
+		HttpSession session = (HttpSession) ec.getSession(false);
+		session.invalidate();
+		HttpServletRequest request = (HttpServletRequest) ec.getRequest();
+		request.logout();
+		ec.redirect(ec.getApplicationContextPath());
 	}
 
 	public void criarProfessor() {
@@ -80,12 +106,32 @@ public class ProfessorBean implements Serializable {
 	}
 
 	public void salvarProfessor() {
-		professor.setNome(professor.getNome());
-		FacesContext.getCurrentInstance().addMessage(null,
+		if (!professor.getSenha().equals(confirmarSenha)) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("ERROR", "Senhas diferentes!"));
+		} else {
+			boolean sameLogin = false;
+			for (Professor p : professores) {
+				if (professor.getLogin().equals(p.getLogin())) {
+					sameLogin = true;
+				}
+			}
+			if (sameLogin) {
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage("ERROR", "Professor já está cadastrado"));
+			} else {
+				professor.setNome(professor.getNome());
+				FacesContext.getCurrentInstance().addMessage(null,
 				new FacesMessage("Professor " + professor.getNome() + "adicionado"));
-		professorService.save(professor);
-		professores = professorService.getAll();
-		professor = new Professor();
+				professorService.save(professor);
+				professores = professorService.getAll();
+				professor = new Professor();		}
+		}
+	}
+	
+	public boolean isUserInRole(String role) {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		return externalContext.isUserInRole(role);
 	}
 
 	public int getMatriculaProfessor() {
@@ -146,5 +192,13 @@ public class ProfessorBean implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getConfirmarSenha() {
+		return confirmarSenha;
+	}
+
+	public void setConfirmarSenha(String confirmarSenha) {
+		this.confirmarSenha = confirmarSenha;
 	}
 }
